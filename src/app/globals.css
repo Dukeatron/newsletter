@@ -6,6 +6,11 @@
   --brand-midnight: #1d2430;
   --brand-champagne: #b9a785;
   --brand-umber: #7b6746;
+  /* Fixed regardless of theme — for decorative always-dark surfaces
+     (hero band, solid buttons/badges) that should stay a dark contrast
+     block in both themes, as opposed to --brand-midnight's "ink" role,
+     which correctly flips to a light color in dark mode. */
+  --brand-ink: #1d2430;
 }
 
 .dark {
@@ -27,6 +32,7 @@
   --color-midnight: var(--brand-midnight);
   --color-champagne: var(--brand-champagne);
   --color-umber: var(--brand-umber);
+  --color-ink: var(--brand-ink);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

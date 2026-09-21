@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div>
-      <section className="border-b border-midnight/10 bg-midnight px-6 py-24 text-center">
+      <section className="border-b border-midnight/10 bg-ink px-6 py-24 text-center">
         <h1 className="font-display text-5xl tracking-wide text-bone sm:text-6xl">
           Marque &amp; Manners
         </h1>
@@ -17,7 +17,7 @@ export default function Home() {
         </p>
         <Link
           href="/subscribe"
-          className="mt-8 inline-block bg-champagne px-6 py-3 font-label text-xs font-medium uppercase tracking-[0.2em] text-midnight transition-colors hover:bg-bone"
+          className="mt-8 inline-block bg-champagne px-6 py-3 font-label text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-champagne/80"
         >
           Subscribe
         </Link>

@@ -75,7 +75,7 @@ export function SubscribeForm({ className }: { className?: string }) {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="whitespace-nowrap bg-midnight px-4 py-2 font-label text-xs font-medium uppercase tracking-[0.15em] text-bone transition-colors hover:bg-umber disabled:opacity-50"
+          className="whitespace-nowrap bg-ink px-4 py-2 font-label text-xs font-medium uppercase tracking-[0.15em] text-bone transition-colors hover:bg-umber disabled:opacity-50"
         >
           {status === "loading" ? "Sending…" : "Subscribe"}
         </button>
