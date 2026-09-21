@@ -1,5 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SendButton } from "@/components/admin/SendButton";
+import { MarkSentButton } from "@/components/admin/MarkSentButton";
+import { CopySubscribersButton } from "@/components/admin/CopySubscribersButton";
 import { getAllSendableContent } from "@/lib/content";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
 
@@ -26,6 +28,14 @@ export default async function AdminSendPage() {
       <p className="mt-3 font-body text-midnight/70">
         New posts and announcements appear here until you send them.
       </p>
+      <p className="mt-2 font-body text-sm text-midnight/50">
+        No verified sending domain yet? Use Preview + Copy subscriber emails
+        to send manually from your own inbox, then Mark as sent.
+      </p>
+
+      <div className="mt-6">
+        <CopySubscribersButton />
+      </div>
 
       <div className="mt-10 divide-y divide-midnight/10">
         {sendable.map((item) => {
@@ -33,7 +43,7 @@ export default async function AdminSendPage() {
           return (
             <div
               key={`${item.contentType}:${item.slug}`}
-              className="flex items-center justify-between gap-4 py-4"
+              className="flex flex-wrap items-start justify-between gap-4 py-4"
             >
               <div>
                 <p className="font-label text-[11px] uppercase tracking-[0.1em] text-umber">
@@ -54,11 +64,26 @@ export default async function AdminSendPage() {
                   Sent
                 </span>
               ) : (
-                <SendButton
-                  contentType={item.contentType}
-                  slug={item.slug}
-                  title={item.title}
-                />
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href={`/api/admin/preview?type=${item.contentType}&slug=${item.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-midnight/40 px-4 py-2 font-label text-xs font-medium uppercase tracking-[0.15em] text-midnight/70 transition-colors hover:border-midnight hover:text-midnight"
+                  >
+                    Preview
+                  </a>
+                  <MarkSentButton
+                    contentType={item.contentType}
+                    slug={item.slug}
+                    title={item.title}
+                  />
+                  <SendButton
+                    contentType={item.contentType}
+                    slug={item.slug}
+                    title={item.title}
+                  />
+                </div>
               )}
             </div>
           );

@@ -1,6 +1,7 @@
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
 import { getResendClient, EMAIL_FROM, SITE_URL } from "@/lib/resend";
 import { getPostBySlug, getAnnouncementBySlug } from "@/lib/content";
+import { getConfirmedSubscribers } from "@/lib/subscribers";
 import { PostNotificationEmail } from "@/emails/PostNotification";
 import { AnnouncementNotificationEmail } from "@/emails/AnnouncementNotification";
 
@@ -35,16 +36,9 @@ export async function sendContentNotification(
     return { ok: false, error: "This has already been sent." };
   }
 
-  const { data: subscribers, error: subscribersError } = await supabase
-    .from("subscribers")
-    .select("email, unsubscribe_token")
-    .eq("status", "confirmed");
+  const subscribers = await getConfirmedSubscribers();
 
-  if (subscribersError) {
-    return { ok: false, error: "Could not load subscribers." };
-  }
-
-  if (!subscribers || subscribers.length === 0) {
+  if (subscribers.length === 0) {
     return { ok: false, error: "No confirmed subscribers to send to." };
   }
 
@@ -106,6 +100,43 @@ export async function sendContentNotification(
 
   if (logError) {
     return { ok: false, error: "Sent, but failed to record send_log." };
+  }
+
+  return { ok: true, recipientCount: subscribers.length };
+}
+
+/**
+ * Records a piece of content as sent without emailing anyone through this
+ * app — for when the owner sent it manually elsewhere (e.g. no verified
+ * sending domain yet). Same idempotency guard as sendContentNotification.
+ */
+export async function markContentAsSent(
+  contentType: "post" | "announcement",
+  slug: string
+): Promise<SendResult> {
+  const supabase = getSupabaseServiceClient();
+
+  const { data: alreadySent } = await supabase
+    .from("sent_log")
+    .select("id")
+    .eq("content_type", contentType)
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (alreadySent) {
+    return { ok: false, error: "This has already been marked as sent." };
+  }
+
+  const subscribers = await getConfirmedSubscribers();
+
+  const { error: logError } = await supabase.from("sent_log").insert({
+    content_type: contentType,
+    slug,
+    recipient_count: subscribers.length,
+  });
+
+  if (logError) {
+    return { ok: false, error: "Could not record this as sent." };
   }
 
   return { ok: true, recipientCount: subscribers.length };

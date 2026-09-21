@@ -19,6 +19,10 @@ export async function POST(request: Request) {
 
   const email = parsed.data.email.toLowerCase().trim();
   const supabase = getSupabaseServiceClient();
+  // Temporary stopgap until a sending domain is verified with Resend — see
+  // .env.example. Remove this branch (and the env var) once real double
+  // opt-in confirmation emails can reach arbitrary subscriber addresses.
+  const autoConfirm = process.env.AUTO_CONFIRM_SUBSCRIBERS === "true";
 
   const { data: existing } = await supabase
     .from("subscribers")
@@ -26,13 +30,29 @@ export async function POST(request: Request) {
     .eq("email", email)
     .maybeSingle();
 
-  let confirmToken: string;
-
   if (existing && existing.status === "confirmed") {
     return NextResponse.json({
       message: "You're already subscribed.",
     });
   }
+
+  if (autoConfirm) {
+    const confirmedFields = { status: "confirmed", confirmed_at: new Date().toISOString() };
+    const { error } = existing
+      ? await supabase.from("subscribers").update(confirmedFields).eq("id", existing.id)
+      : await supabase.from("subscribers").insert({ email, ...confirmedFields });
+
+    if (error) {
+      return NextResponse.json(
+        { message: "Something went wrong. Try again." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ message: "You're subscribed!" });
+  }
+
+  let confirmToken: string;
 
   if (existing) {
     const { data: updated, error } = await supabase
