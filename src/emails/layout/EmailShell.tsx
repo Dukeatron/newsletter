@@ -1,6 +1,7 @@
 import {
   Body,
   Container,
+  Font,
   Head,
   Hr,
   Html,
@@ -24,7 +25,18 @@ export function EmailShell({
 }) {
   return (
     <Html>
-      <Head />
+      <Head>
+        <Font
+          fontFamily="Cormorant Garamond"
+          fallbackFontFamily="Georgia"
+          webFont={{
+            url: "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06KnTOig.woff2",
+            format: "woff2",
+          }}
+          fontWeight={500}
+          fontStyle="normal"
+        />
+      </Head>
       <Preview>{previewText}</Preview>
       <Body
         style={{

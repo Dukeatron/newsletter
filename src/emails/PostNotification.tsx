@@ -1,5 +1,6 @@
 import { Heading, Markdown, Text } from "@react-email/components";
 import { EmailShell } from "@/emails/layout/EmailShell";
+import { LinkPreviewCard } from "@/emails/components/LinkPreviewCard";
 import { emailColors, emailFonts } from "@/emails/theme";
 import { CATEGORY_LABELS, type Category } from "@/lib/content";
 
@@ -11,6 +12,7 @@ export function PostNotificationEmail({
   postUrl,
   siteUrl,
   unsubscribeUrl,
+  issue,
 }: {
   title: string;
   category: Category;
@@ -19,7 +21,11 @@ export function PostNotificationEmail({
   postUrl: string;
   siteUrl: string;
   unsubscribeUrl: string;
+  issue?: number;
 }) {
+  const eyebrow = issue
+    ? `Issue ${String(issue).padStart(2, "0")}`
+    : CATEGORY_LABELS[category];
   return (
     <EmailShell
       previewText={excerpt}
@@ -47,6 +53,9 @@ export function PostNotificationEmail({
       >
         {title}
       </Heading>
+      <div style={{ padding: "8px 0 24px" }}>
+        <LinkPreviewCard eyebrow={eyebrow} title={title} href={postUrl} />
+      </div>
       <Markdown
         markdownCustomStyles={{
           p: { fontSize: "16px", color: emailColors.midnight, lineHeight: 1.6 },
@@ -55,11 +64,6 @@ export function PostNotificationEmail({
       >
         {content}
       </Markdown>
-      <Text style={{ fontSize: "14px" }}>
-        <a href={postUrl} style={{ color: emailColors.umber }}>
-          Read on the site →
-        </a>
-      </Text>
     </EmailShell>
   );
 }

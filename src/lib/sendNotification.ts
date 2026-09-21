@@ -70,6 +70,7 @@ export async function sendContentNotification(
             postUrl: `${SITE_URL}/blog/${post.slug}`,
             siteUrl: SITE_URL,
             unsubscribeUrl,
+            issue: post.issue,
           }),
         };
       }

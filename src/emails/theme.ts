@@ -10,7 +10,7 @@ export const emailColors = {
 };
 
 export const emailFonts = {
-  display: "Georgia, 'Times New Roman', serif",
+  display: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
   body: "Georgia, 'Times New Roman', serif",
   label: "Helvetica, Arial, sans-serif",
 };

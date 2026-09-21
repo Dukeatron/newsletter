@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Newsreader, Hanken_Grotesk } from "next/font/google
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${cormorant.variable} ${newsreader.variable} ${hanken.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bone text-midnight">
+        <PageViewTracker />
         <SiteHeader />
         <main className="flex-1 pt-24">{children}</main>
         <SiteFooter />

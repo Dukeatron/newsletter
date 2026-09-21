@@ -1,5 +1,6 @@
 import { Heading, Markdown, Text } from "@react-email/components";
 import { EmailShell } from "@/emails/layout/EmailShell";
+import { LinkPreviewCard } from "@/emails/components/LinkPreviewCard";
 import { emailColors, emailFonts } from "@/emails/theme";
 
 export function AnnouncementNotificationEmail({
@@ -44,6 +45,13 @@ export function AnnouncementNotificationEmail({
       >
         {title}
       </Heading>
+      <div style={{ padding: "8px 0 24px" }}>
+        <LinkPreviewCard
+          eyebrow="Announcement"
+          title={title}
+          href={announcementUrl}
+        />
+      </div>
       <Markdown
         markdownCustomStyles={{
           p: { fontSize: "16px", color: emailColors.midnight, lineHeight: 1.6 },
@@ -51,11 +59,6 @@ export function AnnouncementNotificationEmail({
       >
         {content}
       </Markdown>
-      <Text style={{ fontSize: "14px" }}>
-        <a href={announcementUrl} style={{ color: emailColors.umber }}>
-          Read on the site →
-        </a>
-      </Text>
     </EmailShell>
   );
 }

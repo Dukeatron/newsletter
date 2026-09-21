@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   // having Next.js block it as a cross-origin dev request. Only affects
   // `next dev`; irrelevant once deployed. If your machine's LAN IP changes,
   // update this to match.
-  allowedDevOrigins: ["10.10.7.79"],
+  allowedDevOrigins: ["10.10.7.79", "192.168.68.53"],
 };
 
 export default nextConfig;
