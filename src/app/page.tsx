@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <div>
       <section className="border-b border-midnight/10 bg-ink px-6 py-24 text-center">
-        <h1 className="font-display text-5xl tracking-wide text-bone sm:text-6xl">
+        <h1 className="font-display text-5xl tracking-wide text-paper sm:text-6xl">
           Marque &amp; Manners
         </h1>
-        <p className="mx-auto mt-4 max-w-xl font-body text-lg text-bone/80">
+        <p className="mx-auto mt-4 max-w-xl font-body text-lg text-paper/80">
           A newsletter on cars, ownership, and the manners of the road.
         </p>
         <Link

@@ -6,7 +6,7 @@ export function CategoryChip({ category }: { category: Category }) {
   return (
     <Link
       href={`/blog/category/${category}`}
-      className="inline-flex items-center rounded-full bg-ink px-3 py-1 font-label text-[11px] font-medium uppercase tracking-[0.15em] text-bone transition-colors hover:bg-umber"
+      className="inline-flex items-center rounded-full bg-ink px-3 py-1 font-label text-[11px] font-medium uppercase tracking-[0.15em] text-paper transition-opacity hover:opacity-80"
     >
       {CATEGORY_LABELS[category]}
     </Link>

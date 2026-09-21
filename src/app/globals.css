@@ -11,6 +11,10 @@
      block in both themes, as opposed to --brand-midnight's "ink" role,
      which correctly flips to a light color in dark mode. */
   --brand-ink: #1d2430;
+  /* Fixed regardless of theme — the text color paired with --brand-ink
+     surfaces above. --brand-bone can't be reused here: it's the page-
+     background token, so it flips to a *dark* value in dark mode. */
+  --brand-paper: #f6f3ed;
 }
 
 .dark {
@@ -33,6 +37,7 @@
   --color-champagne: var(--brand-champagne);
   --color-umber: var(--brand-umber);
   --color-ink: var(--brand-ink);
+  --color-paper: var(--brand-paper);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
