@@ -11,6 +11,7 @@ export function SiteFooter() {
             alt="Marque & Manners"
             width={44}
             height={44}
+            loading="eager"
           />
           <p className="mt-2 max-w-sm font-body text-sm text-midnight/70">
             Motoring, mostly. Manners, occasionally.
