@@ -46,7 +46,7 @@ export function SendButton({
       <button
         onClick={handleClick}
         disabled={status === "loading"}
-        className="bg-ink px-4 py-2 font-label text-xs font-medium uppercase tracking-[0.15em] text-paper transition-opacity hover:opacity-80 disabled:opacity-50"
+        className="border border-champagne bg-ink px-4 py-2 font-label text-xs font-medium uppercase tracking-[0.15em] text-paper transition-opacity hover:opacity-80 disabled:opacity-50"
       >
         {status === "loading" ? "Sending…" : "Send now"}
       </button>
