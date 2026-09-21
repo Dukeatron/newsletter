@@ -27,7 +27,6 @@ const postFrontmatterSchema = z.object({
   excerpt: z.string(),
   cover: z.string().optional(),
   author: z.string(),
-  rating: z.number().min(0).max(10).optional(),
   issue: z.number().optional(),
   draft: z.boolean().optional().default(false),
 });

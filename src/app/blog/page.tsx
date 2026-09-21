@@ -10,7 +10,7 @@ export default function BlogIndexPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Eyebrow>Blog</Eyebrow>
-      <h1 className="mt-2 font-display text-4xl text-midnight">All issues</h1>
+      <h1 className="mt-2 font-display text-4xl text-midnight">All Issues</h1>
       <div className="mt-10">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />

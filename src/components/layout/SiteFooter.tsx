@@ -1,4 +1,4 @@
-import { AmpersandMark } from "@/components/ui/AmpersandMark";
+import Image from "next/image";
 import { SubscribeForm } from "@/components/layout/SubscribeForm";
 
 export function SiteFooter() {
@@ -6,9 +6,14 @@ export function SiteFooter() {
     <footer className="border-t border-midnight/10 bg-stone">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <AmpersandMark variant="umber" size="lg" />
+          <Image
+            src="/brand/monogram.png"
+            alt="Marque & Manners"
+            width={44}
+            height={44}
+          />
           <p className="mt-2 max-w-sm font-body text-sm text-midnight/70">
-            A newsletter on cars, ownership, and the manners of the road.
+            Motoring, mostly. Manners, occasionally.
           </p>
         </div>
         <div className="w-full max-w-sm">

@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CategoryChip } from "@/components/ui/CategoryChip";
-import { RatingBadge } from "@/components/ui/RatingBadge";
 import { IssueBadge } from "@/components/ui/IssueBadge";
 import { TagList } from "@/components/ui/TagList";
 import { Rule } from "@/components/ui/Rule";
@@ -45,7 +44,6 @@ export default async function PostPage({
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <CategoryChip category={post.category} />
-        {post.rating !== undefined && <RatingBadge rating={post.rating} />}
       </div>
       <Rule className="my-8" />
       <PostBody content={post.content} />

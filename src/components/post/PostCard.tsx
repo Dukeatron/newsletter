@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CategoryChip } from "@/components/ui/CategoryChip";
-import { RatingBadge } from "@/components/ui/RatingBadge";
 import { CATEGORY_LABELS, type Post } from "@/lib/content";
 
 export function PostCard({ post }: { post: Post }) {
@@ -16,7 +15,6 @@ export function PostCard({ post }: { post: Post }) {
       <p className="mt-3 font-body text-base text-midnight/80">{post.excerpt}</p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <CategoryChip category={post.category} />
-        {post.rating !== undefined && <RatingBadge rating={post.rating} />}
         <span className="font-label text-[11px] uppercase tracking-[0.1em] text-midnight/50">
           {post.readingTime}
         </span>
