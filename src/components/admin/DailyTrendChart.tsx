@@ -6,7 +6,7 @@ export function DailyTrendChart({ data }: { data: DailyCount[] }) {
   return (
     <div>
       <p className="font-label text-[11px] uppercase tracking-[0.15em] text-umber">
-        Views, last {data.length} days
+        Views, Last {data.length} Days
       </p>
       <div className="mt-3 flex h-24 items-end gap-1">
         {data.map((day) => (

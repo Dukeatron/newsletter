@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { AmpersandMark } from "@/components/ui/AmpersandMark";
 
-export const metadata = { title: "Subscription confirmed" };
+export const metadata = { title: "Subscription Confirmed" };
 
 export default async function ConfirmPage({
   searchParams,

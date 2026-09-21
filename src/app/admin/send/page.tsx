@@ -1,9 +1,10 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SendButton } from "@/components/admin/SendButton";
 import { MarkSentButton } from "@/components/admin/MarkSentButton";
-import { CopySubscribersButton } from "@/components/admin/CopySubscribersButton";
+import { SubscriberList } from "@/components/admin/SubscriberList";
 import { getAllSendableContent } from "@/lib/content";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
+import { getConfirmedSubscriberEmails } from "@/lib/subscribers";
 
 export const dynamic = "force-dynamic";
 
@@ -11,9 +12,12 @@ export default async function AdminSendPage() {
   const sendable = getAllSendableContent();
   const supabase = getSupabaseServiceClient();
 
-  const { data: sentLog } = await supabase
-    .from("sent_log")
-    .select("content_type, slug, sent_at, recipient_count");
+  const [{ data: sentLog }, subscriberEmails] = await Promise.all([
+    supabase
+      .from("sent_log")
+      .select("content_type, slug, sent_at, recipient_count"),
+    getConfirmedSubscriberEmails(),
+  ]);
 
   const sentMap = new Map(
     (sentLog ?? []).map((entry) => [`${entry.content_type}:${entry.slug}`, entry])
@@ -23,18 +27,18 @@ export default async function AdminSendPage() {
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Eyebrow>Admin</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-midnight">
-        Send notifications
+        Send Notifications
       </h1>
       <p className="mt-3 font-body text-midnight/70">
         New posts and announcements appear here until you send them.
       </p>
       <p className="mt-2 font-body text-sm text-midnight/50">
-        No verified sending domain yet? Use Preview + Copy subscriber emails
-        to send manually from your own inbox, then Mark as sent.
+        No verified sending domain yet? Use Preview + the subscriber list
+        below to send manually from your own inbox, then Mark as sent.
       </p>
 
       <div className="mt-6">
-        <CopySubscribersButton />
+        <SubscriberList emails={subscriberEmails} />
       </div>
 
       <div className="mt-10 divide-y divide-midnight/10">

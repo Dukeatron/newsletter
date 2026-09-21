@@ -37,13 +37,13 @@ export default async function AdminMetricsPage() {
       </p>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        <StatTile label="Total views" value={rows.length} />
+        <StatTile label="Total Views" value={rows.length} />
         <StatTile
-          label="Confirmed countries"
+          label="Confirmed Countries"
           value={new Set(rows.map((row) => row.country).filter(Boolean)).size}
         />
         <StatTile
-          label="Posts read"
+          label="Posts Read"
           value={new Set(rows.map((row) => row.post_slug).filter(Boolean)).size}
         />
       </div>
@@ -53,8 +53,8 @@ export default async function AdminMetricsPage() {
       </div>
 
       <div className="mt-10 grid gap-10 sm:grid-cols-2">
-        <BarList title="Top posts" entries={topPosts(rows)} />
-        <BarList title="Top countries" entries={topCountries(rows)} />
+        <BarList title="Top Posts" entries={topPosts(rows)} />
+        <BarList title="Top Countries" entries={topCountries(rows)} />
         <BarList title="Devices" entries={deviceBreakdown(rows)} />
       </div>
     </div>

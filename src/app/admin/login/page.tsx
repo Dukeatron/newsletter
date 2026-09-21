@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
     <div className="mx-auto max-w-sm px-6 py-24 text-center">
       <AmpersandMark variant="umber" size="lg" className="mx-auto block" />
       <Eyebrow className="mt-6">Admin</Eyebrow>
-      <h1 className="mt-2 font-display text-3xl text-midnight">Sign in</h1>
+      <h1 className="mt-2 font-display text-3xl text-midnight">Sign In</h1>
       <form onSubmit={handleSubmit} className="mt-8 space-y-3 text-left">
         <input
           type="password"

@@ -19,7 +19,7 @@ export function SiteFooter() {
         </div>
         <div className="w-full max-w-sm">
           <p className="font-label text-xs font-medium uppercase tracking-[0.2em] text-umber">
-            Join the mailing list
+            Join the Mailing List
           </p>
           <SubscribeForm className="mt-3" />
         </div>

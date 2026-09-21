@@ -4,13 +4,27 @@ import { useState, type FormEvent } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function SubscribeForm({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
 
+  const isValidFormat = email === "" || EMAIL_PATTERN.test(email);
+  const showFormatError = touched && email !== "" && !isValidFormat;
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!EMAIL_PATTERN.test(email)) {
+      setTouched(true);
+      setStatus("error");
+      setMessage("Enter a valid email address.");
+      return;
+    }
+
     setStatus("loading");
     setMessage(null);
 
@@ -45,8 +59,18 @@ export function SubscribeForm({ className }: { className?: string }) {
           required
           placeholder="you@example.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full flex-1 border border-midnight/20 bg-bone px-3 py-2 font-body text-sm text-midnight placeholder:text-midnight/40 focus:border-umber focus:outline-none"
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setStatus("idle");
+            setMessage(null);
+          }}
+          onBlur={() => setTouched(true)}
+          aria-invalid={showFormatError}
+          className={`w-full flex-1 border bg-bone px-3 py-2 font-body text-sm text-midnight placeholder:text-midnight/40 focus:outline-none ${
+            showFormatError
+              ? "border-red-700 focus:border-red-700"
+              : "border-midnight/20 focus:border-umber"
+          }`}
         />
         <button
           type="submit"
@@ -56,6 +80,11 @@ export function SubscribeForm({ className }: { className?: string }) {
           {status === "loading" ? "Sending…" : "Subscribe"}
         </button>
       </div>
+      {showFormatError && !message && (
+        <p className="mt-2 font-body text-sm text-red-700">
+          That doesn&apos;t look like a valid email address.
+        </p>
+      )}
       {message && (
         <p
           className={`mt-2 font-body text-sm ${

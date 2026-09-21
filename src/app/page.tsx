@@ -26,7 +26,7 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <Eyebrow>Latest</Eyebrow>
         <h2 className="mt-2 font-display text-4xl text-midnight">
-          Recent issues
+          Recent Issues
         </h2>
         <div className="mt-10">
           {posts.map((post) => (

@@ -21,7 +21,19 @@ export async function POST(request: Request) {
     );
   }
 
-  const isValid = await bcrypt.compare(parsed.data.password, passwordHash);
+  let isValid = false;
+  try {
+    isValid = await bcrypt.compare(parsed.data.password, passwordHash);
+  } catch {
+    // A malformed hash (e.g. corrupted by shell `$`-interpolation when the
+    // env var was set) throws here instead of just returning false — surface
+    // it as a clear config error rather than a generic 500.
+    return NextResponse.json(
+      { message: "ADMIN_PASSWORD_HASH looks malformed — regenerate it." },
+      { status: 500 }
+    );
+  }
+
   if (!isValid) {
     return NextResponse.json({ message: "Incorrect password." }, { status: 401 });
   }
