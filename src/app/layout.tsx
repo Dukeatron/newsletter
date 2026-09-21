@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Newsreader, Hanken_Grotesk } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -34,13 +35,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${cormorant.variable} ${newsreader.variable} ${hanken.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bone text-midnight">
-        <PageViewTracker />
-        <SiteHeader />
-        <main className="flex-1 pt-24">{children}</main>
-        <SiteFooter />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <PageViewTracker />
+          <SiteHeader />
+          <main className="flex-1 pt-24">{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

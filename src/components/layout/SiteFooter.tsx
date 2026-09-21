@@ -1,18 +1,12 @@
-import Image from "next/image";
 import { SubscribeForm } from "@/components/layout/SubscribeForm";
+import { FooterMonogram } from "@/components/layout/FooterMonogram";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-midnight/10 bg-stone">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <Image
-            src="/brand/monogram.png"
-            alt="Marque & Manners"
-            width={44}
-            height={44}
-            loading="eager"
-          />
+          <FooterMonogram />
           <p className="mt-2 max-w-sm font-body text-sm text-midnight/70">
             Motoring, mostly. Manners, occasionally.
           </p>

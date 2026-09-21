@@ -1,16 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f3ed;
-  --foreground: #1d2430;
+  --brand-bone: #f6f3ed;
+  --brand-stone: #e7e1d5;
+  --brand-midnight: #1d2430;
+  --brand-champagne: #b9a785;
+  --brand-umber: #7b6746;
+}
+
+.dark {
+  --brand-bone: #12161d; /* Night */
+  --brand-stone: #1b212b; /* Slate */
+  --brand-midnight: #eae5da; /* dark-mode Bone / ink */
+  --brand-champagne: #c9b896; /* dark-mode Champagne */
+  --brand-umber: #c9b896; /* same accent gold — the dark sheet gives one accent, not two */
+}
+
+:root {
+  --background: var(--brand-bone);
+  --foreground: var(--brand-midnight);
 }
 
 @theme inline {
-  --color-bone: #f6f3ed;
-  --color-stone: #e7e1d5;
-  --color-midnight: #1d2430;
-  --color-champagne: #b9a785;
-  --color-umber: #7b6746;
+  --color-bone: var(--brand-bone);
+  --color-stone: var(--brand-stone);
+  --color-midnight: var(--brand-midnight);
+  --color-champagne: var(--brand-champagne);
+  --color-umber: var(--brand-umber);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -34,6 +50,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .prose-content > * + * {

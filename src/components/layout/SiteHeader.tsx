@@ -4,17 +4,27 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/cn";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { NAV_LINKS, isNavLinkActive } from "@/components/layout/nav-links";
 import { MobileNavDrawer } from "@/components/layout/MobileNavDrawer";
 import { PageTitleBar } from "@/components/layout/PageTitleBar";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const SCROLL_THRESHOLD = 24;
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
+  const mounted = useHasMounted();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const monogramSrc =
+    mounted && resolvedTheme === "dark"
+      ? "/brand/monogram-dark.png"
+      : "/brand/monogram.png";
 
   useEffect(() => {
     function handleScroll() {
@@ -51,7 +61,7 @@ export function SiteHeader() {
               )}
             >
               <Image
-                src="/brand/monogram.png"
+                src={monogramSrc}
                 alt="Marque & Manners"
                 width={32}
                 height={32}
@@ -80,18 +90,21 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setDrawerOpen(true)}
-            aria-expanded={drawerOpen}
-            aria-controls="mobile-nav-drawer"
-            aria-label="Open menu"
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
-          >
-            <span className="h-px w-5 bg-midnight" />
-            <span className="h-px w-5 bg-midnight" />
-            <span className="h-px w-5 bg-midnight" />
-          </button>
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(true)}
+              aria-expanded={drawerOpen}
+              aria-controls="mobile-nav-drawer"
+              aria-label="Open menu"
+              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
+            >
+              <span className="h-px w-5 bg-midnight" />
+              <span className="h-px w-5 bg-midnight" />
+              <span className="h-px w-5 bg-midnight" />
+            </button>
+          </div>
         </div>
 
         <PageTitleBar />
