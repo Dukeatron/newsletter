@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { cn } from "@/lib/cn";
 
-export function TagList({ tags }: { tags: string[] }) {
+export function TagList({
+  tags,
+  className,
+}: {
+  tags: string[];
+  className?: string;
+}) {
   if (tags.length === 0) return null;
 
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className={cn("flex flex-wrap gap-2", className)}>
       {tags.map((tag) => (
         <li key={tag}>
           <Link

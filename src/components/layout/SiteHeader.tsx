@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/cn";
 import { useHasMounted } from "@/lib/useHasMounted";
+import { isArticleRoute } from "@/lib/isArticleRoute";
 import { NAV_LINKS, isNavLinkActive } from "@/components/layout/nav-links";
 import { MobileNavDrawer } from "@/components/layout/MobileNavDrawer";
 import { PageTitleBar } from "@/components/layout/PageTitleBar";
@@ -25,6 +26,7 @@ export function SiteHeader() {
     mounted && resolvedTheme === "dark"
       ? "/brand/monogram-dark.png"
       : "/brand/monogram.png";
+  const isArticle = isArticleRoute(pathname);
 
   useEffect(() => {
     function handleScroll() {
@@ -39,7 +41,7 @@ export function SiteHeader() {
     <>
       <header className="fixed inset-x-0 top-0 z-40 border-b border-midnight/10 bg-bone/95 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-          <Link href="/" className="relative block h-9 w-56 shrink-0">
+          <Link href="/" className="relative -ml-1 block h-9 w-56 shrink-0">
             <span
               className={cn(
                 "absolute inset-y-0 left-0 flex items-center gap-2 transition-all duration-300",
@@ -107,7 +109,9 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <PageTitleBar />
+        <div className={isArticle ? "" : "lg:hidden"}>
+          <PageTitleBar />
+        </div>
       </header>
 
       <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />

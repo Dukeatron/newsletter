@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { getAllAnnouncements } from "@/lib/content";
 
 export const metadata = { title: "Announcements" };
@@ -9,8 +8,7 @@ export default function AnnouncementsIndexPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
-      <Eyebrow>Announcements</Eyebrow>
-      <h1 className="mt-2 font-display text-4xl text-midnight">Announcements</h1>
+      <h1 className="font-display text-4xl text-midnight">Announcements</h1>
       <div className="mt-10">
         {announcements.map((announcement) => (
           <article

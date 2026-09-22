@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PageMain } from "@/components/layout/PageMain";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 
 const cormorant = Cormorant_Garamond({
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <PageViewTracker />
           <SiteHeader />
-          <main className="flex-1 pt-24">{children}</main>
+          <PageMain>{children}</PageMain>
           <SiteFooter />
         </ThemeProvider>
       </body>
