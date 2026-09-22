@@ -54,7 +54,7 @@ export default function AdminLoginPage() {
         >
           {loading ? "Signing in…" : "Sign in"}
         </button>
-        {error && <p className="text-sm text-red-700">{error}</p>}
+        {error && <p className="text-sm text-error">{error}</p>}
       </form>
     </div>
   );

@@ -54,7 +54,12 @@ export function PostNotificationEmail({
         {title}
       </Heading>
       <div style={{ padding: "8px 0 24px" }}>
-        <LinkPreviewCard eyebrow={eyebrow} title={title} href={postUrl} />
+        <LinkPreviewCard
+          eyebrow={eyebrow}
+          title={title}
+          href={postUrl}
+          siteUrl={siteUrl}
+        />
       </div>
       <Markdown
         markdownCustomStyles={{

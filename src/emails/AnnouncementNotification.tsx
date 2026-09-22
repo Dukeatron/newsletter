@@ -50,6 +50,7 @@ export function AnnouncementNotificationEmail({
           eyebrow="Announcement"
           title={title}
           href={announcementUrl}
+          siteUrl={siteUrl}
         />
       </div>
       <Markdown

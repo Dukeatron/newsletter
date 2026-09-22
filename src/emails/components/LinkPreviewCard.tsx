@@ -1,27 +1,29 @@
-import { Heading, Section, Text } from "@react-email/components";
+import { Heading, Img, Section, Text } from "@react-email/components";
 import { emailColors, emailFonts } from "@/emails/theme";
 
 /**
  * Branded link-preview card matching the "LINK PREVIEW" mockup in
  * public/brand/applications.png: bordered card, eyebrow, large serif
- * title, small masthead pinned near the bottom. The whole card is a
- * single clickable link through to the live post/announcement.
+ * title, emblem pinned near the bottom. The whole card is a single
+ * clickable link through to the live post/announcement.
  */
 export function LinkPreviewCard({
   eyebrow,
   title,
   href,
+  siteUrl,
 }: {
   eyebrow: string;
   title: string;
   href: string;
+  siteUrl: string;
 }) {
   return (
     <a href={href} style={{ textDecoration: "none", display: "block" }}>
       <Section
         style={{
           backgroundColor: emailColors.bone,
-          border: `1px solid ${emailColors.champagne}`,
+          border: `1px solid ${emailColors.umber}`,
           padding: "28px 24px",
         }}
       >
@@ -49,22 +51,13 @@ export function LinkPreviewCard({
         >
           {title}
         </Heading>
-        <Text
-          style={{
-            fontFamily: emailFonts.display,
-            fontSize: "13px",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: emailColors.midnight,
-            margin: "28px 0 0",
-          }}
-        >
-          Marque{" "}
-          <span style={{ color: emailColors.umber, fontStyle: "italic" }}>
-            &amp;
-          </span>{" "}
-          Manners
-        </Text>
+        <Img
+          src={`${siteUrl}/brand/monogram.png`}
+          alt="Marque & Manners"
+          width={28}
+          height={28}
+          style={{ marginTop: "28px" }}
+        />
       </Section>
     </a>
   );

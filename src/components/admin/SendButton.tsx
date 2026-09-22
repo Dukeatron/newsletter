@@ -50,7 +50,7 @@ export function SendButton({
       >
         {status === "loading" ? "Sending…" : "Send now"}
       </button>
-      {message && <p className="mt-2 text-sm text-red-700">{message}</p>}
+      {message && <p className="mt-2 text-sm text-error">{message}</p>}
     </div>
   );
 }

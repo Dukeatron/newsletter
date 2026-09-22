@@ -68,7 +68,7 @@ export function SubscribeForm({ className }: { className?: string }) {
           aria-invalid={showFormatError}
           className={`w-full flex-1 border bg-bone px-3 py-2 font-body text-sm text-midnight placeholder:text-midnight/40 focus:outline-none ${
             showFormatError
-              ? "border-red-700 focus:border-red-700"
+              ? "border-error focus:border-error"
               : "border-midnight/20 focus:border-umber"
           }`}
         />
@@ -81,14 +81,14 @@ export function SubscribeForm({ className }: { className?: string }) {
         </button>
       </div>
       {showFormatError && !message && (
-        <p className="mt-2 font-body text-sm text-red-700">
+        <p className="mt-2 font-body text-sm text-error">
           That doesn&apos;t look like a valid email address.
         </p>
       )}
       {message && (
         <p
           className={`mt-2 font-body text-sm ${
-            status === "error" ? "text-red-700" : "text-umber"
+            status === "error" ? "text-error" : "text-umber"
           }`}
         >
           {message}
